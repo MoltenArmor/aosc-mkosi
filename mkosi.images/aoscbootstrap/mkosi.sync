@@ -1,6 +1,7 @@
 #!/bin/sh
 set -ue
 
+# Probably no use, but anyway...
 [ -d "$SRCDIR/aoscbootstrap" ] && \
     rm -rf "$SRCDIR/aoscbootstrap"
 
