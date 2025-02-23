@@ -2,4 +2,7 @@
 set -ue
 
 cd "$SRCDIR/aoscbootstrap/" && \
-    cargo build --release --target-dir "$BUILDDIR/target" || exit 1
+    cargo build --release --target-dir "$BUILDDIR/target"
+
+cd "$BUILDDIR/target/release" && \
+    ./aoscbootstrap stable "$OUTPUTDIR/base/"
