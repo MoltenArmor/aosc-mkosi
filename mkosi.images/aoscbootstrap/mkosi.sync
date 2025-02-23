@@ -1,0 +1,8 @@
+#!/bin/sh
+set -ue
+
+[ -d "$SRCDIR/aoscbootstrap" ] && \
+    rm -rf "$SRCDIR/aoscbootstrap"
+
+cd "$SRCDIR" && \
+    git clone https://github.com/AOSC-Dev/aoscbootstrap.git || exit 1

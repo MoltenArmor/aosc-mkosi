@@ -1,5 +1,5 @@
 #!/bin/sh
 set -ue
 
-cd /root/aoscbootstrap/ && \
+cd "$SRCDIR/aoscbootstrap/" && \
     cargo build || exit 1

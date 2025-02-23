@@ -1,5 +1,0 @@
-#!/bin/sh
-set -ue
-
-cd /root/ && \
-    git clone https://github.com/AOSC-Dev/aoscbootstrap.git || exit 1
