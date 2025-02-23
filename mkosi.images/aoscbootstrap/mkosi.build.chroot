@@ -1,8 +1,32 @@
 #!/bin/sh
 set -ue
 
-cd "$SRCDIR/aoscbootstrap/" && \
-    cargo build --release --target-dir "$BUILDDIR/target"
+cd "$CHROOT_SRCDIR/aoscbootstrap/" && \
+    cargo build --release --target-dir "$CHROOT_BUILDDIR/target"
 
-cd "$BUILDDIR/target/release" && \
-    ./aoscbootstrap stable "$OUTPUTDIR/base/"
+cat << 'EOT' > "$CHROOT_BUILDDIR/target/release/aosc-mainline.toml"
+stub-packages = [
+  "aosc-aaa",
+  "apt",
+  "gcc-runtime",
+  "tar",
+  "xz",
+  "gnupg",
+  "grep",
+  "ca-certs",
+  "iptables",
+  "shadow",
+  "systemd",
+  "keyutils"
+]
+base-packages = [
+  "bash-completion",
+  "bash-startup",
+  "iana-etc",
+  "libidn",
+  "tzdata"
+]
+EOT
+
+cd "$CHROOT_BUILDDIR/target/release/" && \
+    ./aoscbootstrap --config=aosc-mainline.toml stable "$SRCDIR/mkosi.output/base/"
