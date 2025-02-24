@@ -30,6 +30,7 @@ base-packages = [
 EOT
 
 cd "$CHROOT_BUILDDIR/target/release/" && \
+    ! [ -e "$CHROOT_SRCDIR/mkosi.output/rootfs/stage2_script.sh" ] && \
     # Let's just do stage1 because chroot inside sandbox will make /proc inaccessible.
     ./aoscbootstrap --stage1-only --config=aosc-mainline.toml stable "$CHROOT_SRCDIR/mkosi.output/rootfs/" 2>&1 | tee aoscbootstrap.log
     # Let's rename the stage 2 script.
