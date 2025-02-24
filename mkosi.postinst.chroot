@@ -3,3 +3,4 @@ set -ue
 
 cp --archive --update=none /etc/os-release /usr/lib/os-release
 bash /stage2_script.sh
+rm -f /stage2_script.sh
