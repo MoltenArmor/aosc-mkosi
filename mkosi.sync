@@ -1,0 +1,6 @@
+#!/bin/sh
+set -ue
+
+! [ -x "${SRCDIR}/base-rootfs/mkosi.output/rootfs/stage2_script.sh" ] && \
+    printf '%s\n' "You have not built the base-rootfs image! Please build it at first!"
+	exit 1
