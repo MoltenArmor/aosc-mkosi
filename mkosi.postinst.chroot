@@ -2,5 +2,3 @@
 set -ue
 
 bash /stage2_script.sh
-packages="$(tr -s '\n' ' ' < "$CHROOT_SRCDIR/pkg.list")"
-apt install -y "${packages}"
