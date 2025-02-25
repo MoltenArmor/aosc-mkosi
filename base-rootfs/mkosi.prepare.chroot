@@ -2,7 +2,9 @@
 set -ue
 
 # Exit when build.
-grep -qF 'build' "$*" && exit 0
+if printf '%s' "$*" | grep -qF 'build'; then
+     exit 0
+fi
 
 cp --archive --update=none /etc/os-release /usr/lib/os-release
 bash /stage2_script.sh
