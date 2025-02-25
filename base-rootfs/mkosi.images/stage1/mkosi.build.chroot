@@ -30,14 +30,19 @@ base-packages = [
 EOT
 
 cd "$CHROOT_BUILDDIR/target/release/" || exit 1
-if ! [ -e "$CHROOT_SRCDIR/mkosi.output/rootfs/stage2_script.sh" ]; then
+# Let's keep conservative.
+if ! [ -d "$CHROOT_SRCDIR/mkosi.output/rootfs/" ]; then
     # Let's just do stage1 because chroot inside sandbox will make /proc inaccessible.
+    ./aoscbootstrap --stage1-only --config=aosc-mainline.toml stable "$CHROOT_SRCDIR/mkosi.output/rootfs/" 2>&1 | tee aoscbootstrap.log
+    # Let's rename the stage 2 script.
+    script_fname="$(grep -F -m 1 'If you want to continue stage 2,' aoscbootstrap.log | grep -Eo '\.tmp[[:alnum:]]+')"
+    cd "$CHROOT_SRCDIR/mkosi.output/rootfs/" && mv "${script_fname}" stage2_script.sh
+elif printf '%s' "$*" | grep -qF '--force'; then
     ./aoscbootstrap --force --stage1-only --config=aosc-mainline.toml stable "$CHROOT_SRCDIR/mkosi.output/rootfs/" 2>&1 | tee aoscbootstrap.log
     # Let's rename the stage 2 script.
     script_fname="$(grep -F -m 1 'If you want to continue stage 2,' aoscbootstrap.log | grep -Eo '\.tmp[[:alnum:]]+')"
+    cd "$CHROOT_SRCDIR/mkosi.output/rootfs/" && mv "${script_fname}" stage2_script.sh
 else
+    printf '%s\n' 'The base-rootfs seems to have been built. If you want to rebuild it, remove it or run mkosi build -- --force.'
     exit 0
 fi
-    
-cd "$CHROOT_SRCDIR/mkosi.output/rootfs/" && \
-    mv "${script_fname}" stage2_script.sh

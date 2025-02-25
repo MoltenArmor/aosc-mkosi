@@ -2,10 +2,12 @@
 set -ue
 
 # Exit when build.
-if printf '%s' "$*" | grep -qF 'build'; then
+if ! printf '%s' "$*" | grep -qF 'final'; then
      exit 0
 fi
 
 cp --archive --update=none /etc/os-release /usr/lib/os-release
-bash /stage2_script.sh
-rm -f /stage2_script.sh
+# Run stage 2 script.
+if [ -f /stage2_script.sh ]; then
+    bash /stage2_script.sh && rm -f /stage2_script.sh
+fi

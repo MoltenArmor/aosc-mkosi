@@ -1,5 +1,0 @@
-#!/bin/sh
-set -ue
-
-printf '%s' "$*" | grep -qF 'final' && \
-    cp --archive --update=none /etc/os-release /usr/lib/os-release
