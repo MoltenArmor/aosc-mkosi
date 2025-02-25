@@ -1,9 +1,8 @@
 #!/bin/sh
 set -ue
 
-[ -d "$SRCDIR/aoscbootstrap/" ] && \
-    cd "$SRCDIR/aoscbootstrap/" && \
-    git pull
-
-cd "$SRCDIR" && \
-    git clone https://github.com/AOSC-Dev/aoscbootstrap.git || exit 1
+if [ -d "$SRCDIR/aoscbootstrap/" ]; then
+    cd "$SRCDIR/aoscbootstrap/" && git pull
+else
+    cd "$SRCDIR" && git clone https://github.com/AOSC-Dev/aoscbootstrap.git
+fi
