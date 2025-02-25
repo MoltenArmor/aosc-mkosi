@@ -1,0 +1,6 @@
+#!/bin/sh
+set -ue
+
+# If you want to do cleanup.
+# rm -rf "$CHROOT_OUTPUTDIR/stage1"
+cp --archive --update=none /etc/os-release /usr/lib/os-release

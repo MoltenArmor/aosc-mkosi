@@ -43,6 +43,5 @@ elif printf '%s' "$*" | grep -qF -- '--force'; then
     script_fname="$(grep -F -m 1 'If you want to continue stage 2,' aoscbootstrap.log | grep -Eo '\.tmp[[:alnum:]]+')"
     cd "$CHROOT_SRCDIR/mkosi.output/stage1/" && mv "${script_fname}" stage2_script.sh
 else
-    printf '%s\n' 'The base-rootfs seems to have been built. If you want to rebuild it, remove it or run mkosi build -- --force.'
     exit 0
 fi
