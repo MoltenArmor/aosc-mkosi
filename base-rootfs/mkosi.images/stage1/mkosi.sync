@@ -1,9 +1,9 @@
 #!/bin/sh
 set -ue
 
-# Probably no use, but anyway...
-[ -d "$SRCDIR/aoscbootstrap" ] && \
-    rm -rf "$SRCDIR/aoscbootstrap"
+[ -d "$SRCDIR/aoscbootstrap/" ] && \
+    cd "$SRCDIR/aoscbootstrap/" && \
+    git pull
 
 cd "$SRCDIR" && \
     git clone https://github.com/AOSC-Dev/aoscbootstrap.git || exit 1
