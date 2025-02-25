@@ -1,6 +1,0 @@
-#!/bin/sh
-set -ue
-
-# If Format=none and mkosi.build does not exist, mkosi will not execute mkosi.prepare.
-# See: https://github.com/systemd/mkosi/blob/main/mkosi/__init__.py#5201
-exit 0
