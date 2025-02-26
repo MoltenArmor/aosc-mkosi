@@ -1,0 +1,5 @@
+#!/bin/sh
+set -ue
+
+# We really don't need debug and security repos.
+rm -f /etc/apt/sources.list.d/stable.sources
