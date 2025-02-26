@@ -1,7 +1,7 @@
 #!/bin/sh
 set -ue
 
-if ! [ -e "${SRCDIR}/base-rootfs/mkosi.output/rootfs/stage2_script.sh" ]; then
+if ! [ -d "${SRCDIR}/base-rootfs/mkosi.output/rootfs/" ]; then
     printf '%s\n' 'You have not built the base-rootfs image! Please build it at first:'
     printf '%s\n' 'cd base-rootfs && mkosi'
     exit 1
